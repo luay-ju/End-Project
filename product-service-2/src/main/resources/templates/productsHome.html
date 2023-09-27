@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+    <style>
+
+        *{
+
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Zwei Spalten pro Zeile */
+            gap: 20px; /* Abstand zwischen den Boxen */
+        }
+
+        .product-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .product-box img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .product-box .product-info {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .product-box .btn {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-box .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ff0000;
+        }
+
+        .navbar-nav .nav-item:hover {
+            background-color: #535754;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>Product Service</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="http://localhost:8080/products">Products</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="http://localhost:8081/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="http://localhost:8080/getOrders">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/cart">Cart</a>
+                </li>
+
+            </ul>
+            <div>
+                <a class="nav-link text-white" href="http://localhost:8080/logout">Login Out</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<form method="post" th:object="${product}" th:action="@{/saveProduct}" enctype="multipart/form-data">
+    <div class="product-container">
+        <div th:each="product : ${listProduct}" class="product-box">
+            <img th:src="@{/images/T-shirt.jpg}" class="img-round" alt="No Pic" width="500" height="200"  />
+            <div class="product-info">
+
+                <p><strong>ID:</strong> <span th:text="${product.id}"></span></p>
+                <p><strong>Name:</strong> <span th:text="${product.productName}"></span></p>
+                <p><strong>Price:</strong> <span th:text="${product.price}"></span></p>
+                <p><strong>Marke:</strong> <span th:text="${product.marke}"></span></p>
+                <p><strong>Size:</strong> <span th:text="${product.size}"></span></p>
+            </div>
+            <a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
+        </div>
+    </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<table border="1" class="table table-hover">
+    <thead>
+    <tr class="active">
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Marke</th>
+        <th>Size</th>
+        <th>Photo</th>
+        <th>Action</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${listProduct}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.marke}"></td>
+        <td th:text="${product.size}"></td>
+        <td><a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
+
+        <td><img th:src="${product.photosImagePath}" class="img-round" alt="No pic" width="100" height="60" /></td>
+    </tr>
+
+
+    </tbody>
+</table>
+-->
+
+
+<!--
+<div class="container">
+    <div th:if="${not #lists.isEmpty(listProduct)}">
+        <h2>Products list</h2>
+        <table class="table table-striped">
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Marke</th>
+            <th>Size</th>
+            <th>Photo</th>
+            <th>Action</th>
+
+            <tr th:each="product : ${listProduct}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.marke}"></td>
+                <td th:text="${product.size}"></td>
+                <td><a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
+
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+-->
+
+
+
+
+
+<!--
+
+<table class="table">
+    <thead>
+</thead>
+<tbody>
+<tr th:each="product : ${listProduct}">
+    <td>
+        <div class="product-box">
+            <img th:src="${product.photosImagePath}" alt="No pic" />
+            <div class="product-info">
+                <p><strong>ID:</strong> <span th:text="${product.id}"></span></p>
+                <p><strong>Name:</strong> <span th:text="${product.productName}"></span></p>
+                <p><strong>Price:</strong> <span th:text="${product.price}"></span></p>
+                <p><strong>Marke:</strong> <span th:text="${product.marke}"></span></p>
+                <p><strong>Size:</strong> <span th:text="${product.size}"></span></p>
+            </div>
+            <a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>
+
+-->
+
