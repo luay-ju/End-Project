@@ -82,6 +82,11 @@ public class UserController {
         id = userData.getId();
 
         if (userEmail.equals("admin@admin")){
+            CustomMessage message = new CustomMessage();
+            message.setMessageId(userEmail); // Oder verwende getUserInfoEmail() hier, wenn erforderlich
+            message.setMessage(String.valueOf(id)); // Oder verwende getUserInfoId() hier, wenn erforderlich
+            message.setMessageDate(new Date());
+            template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
             return "Admin";
          }
 

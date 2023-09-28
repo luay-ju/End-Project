@@ -1,12 +1,12 @@
 version: "3.9"
 
 services:
-  db:
+  database:
     platform: linux/x86_64
     image: mysql:8.0
-    container_name: mysql-3
+    container_name: mysql-2
     ports:
-      - "3346:3306"
+      - "3306:3306"
     volumes:
       - ./:/app/
     environment:
@@ -14,6 +14,7 @@ services:
       MYSQL_USER: customer
       MYSQL_PASSWORD: customer
       MYSQL_ROOT_PASSWORD: MyLu805881!
+
     networks:
       - internal
 
@@ -35,16 +36,16 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - database
       - rabbitmq-container
     volumes:
       - ./:/app/app
     links:
-      - db
+      - database
     networks:
       - internal
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/web_customer_tracker?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/web_customer_tracker?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       - spring_rabbitmq_host=rabbitmq-container
       - spring_rabbitmq_port=5672
 

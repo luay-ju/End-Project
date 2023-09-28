@@ -6,7 +6,7 @@ services:
     image: mysql:8.0
     container_name: mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./:/app/
     environment:
@@ -17,14 +17,6 @@ services:
     networks:
       - internal
 
-  rabbitmq-container:
-    image: rabbitmq:3.11-management
-    hostname: rabbitmq-container
-    ports:
-      - "15673:15673"
-      - "5673:5672"
-    networks:
-      - internal
 
   app:
     container_name: demo
@@ -36,7 +28,6 @@ services:
       - "8081:8081"
     depends_on:
       - database
-      - rabbitmq-container
     volumes:
       - ./:/app/app
     links:

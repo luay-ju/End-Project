@@ -1,5 +1,7 @@
 package com.luluShop.customerservice.login.controller;
 
+import com.luluShop.customerservice.login.rmq.CustomMessage;
+import com.luluShop.customerservice.login.rmq.MQConfig;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +17,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.ui.Model;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 class UserControllerTest {
@@ -34,9 +39,16 @@ class UserControllerTest {
     @Mock
     private Model model;
 
+    @Mock
+    private RabbitTemplate rabbitTemplate;
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        rabbitTemplate = mock(RabbitTemplate.class);
+        controller = new UserController();
+
     }
 
 
@@ -125,4 +137,7 @@ class UserControllerTest {
         assertEquals("", result); // You might want to specify a return value here based on your application logic
         verify(model).addAttribute(eq("product"), eq(user));
     }
+
+
+
 }

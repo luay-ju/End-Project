@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,4 +97,52 @@ public class UserServiceImplTest {
         userService.deleteUserBYId(userId);
         verify(userRepo, times(1)).deleteById(userId);
     }
+
+    // ____
+
+
+    @Test
+    public void testRegisterUserInvalidUser() {
+
+        User invalidUser = new User();
+
+
+        doThrow(RuntimeException.class).when(userRepo).save(invalidUser);
+
+
+        assertThrows(RuntimeException.class, () -> userService.registerUser(invalidUser));
+
+
+        verify(userRepo, times(1)).save(invalidUser);
+    }
+
+
+    @Test
+    public void testLoginWithInvalidCredentials() {
+        String email = "user@example.com";
+        String password = "password";
+        when(userRepo.findByEmailAndPassword(email, password)).thenReturn(null);
+
+        User result = userService.login(email, password);
+
+        assertNull(result);
+    }
+
+    @Test
+    public void testGetAllUsersEmptyResult() {
+        when(userRepo.findAll()).thenReturn(Collections.emptyList());
+
+        List<User> result = userService.getAllUsers(null);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testDeleteUserByIdNotFound() {
+        Integer userId = 1;
+        doThrow(EmptyResultDataAccessException.class).when(userRepo).deleteById(userId);
+
+        assertThrows(RuntimeException.class, () -> userService.deleteUserBYId(userId));
+    }
+
 }
