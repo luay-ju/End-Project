@@ -93,7 +93,7 @@
 
             </ul>
             <div>
-                <a class="nav-link text-white" href="http://localhost:8080/logout">Login Out</a>
+                <a class="nav-link text-white" href="http://localhost:8081/logout">Login Out</a>
             </div>
 
         </div>
@@ -130,104 +130,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!--
-<table border="1" class="table table-hover">
-    <thead>
-    <tr class="active">
-        <th>Product ID</th>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Marke</th>
-        <th>Size</th>
-        <th>Photo</th>
-        <th>Action</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product : ${listProduct}">
-        <td th:text="${product.id}"></td>
-        <td th:text="${product.productName}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.marke}"></td>
-        <td th:text="${product.size}"></td>
-        <td><a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
-
-        <td><img th:src="${product.photosImagePath}" class="img-round" alt="No pic" width="100" height="60" /></td>
-    </tr>
-
-
-    </tbody>
-</table>
--->
-
-
-<!--
-<div class="container">
-    <div th:if="${not #lists.isEmpty(listProduct)}">
-        <h2>Products list</h2>
-        <table class="table table-striped">
-            <th>Product ID</th>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Marke</th>
-            <th>Size</th>
-            <th>Photo</th>
-            <th>Action</th>
-
-            <tr th:each="product : ${listProduct}">
-                <td th:text="${product.id}"></td>
-                <td th:text="${product.productName}"></td>
-                <td th:text="${product.price}"></td>
-                <td th:text="${product.marke}"></td>
-                <td th:text="${product.size}"></td>
-                <td><a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
-
-            </tr>
-
-        </table>
-    </div>
-
-</div>
--->
-
-
-
-
-
-<!--
-
-<table class="table">
-    <thead>
-</thead>
-<tbody>
-<tr th:each="product : ${listProduct}">
-    <td>
-        <div class="product-box">
-            <img th:src="${product.photosImagePath}" alt="No pic" />
-            <div class="product-info">
-                <p><strong>ID:</strong> <span th:text="${product.id}"></span></p>
-                <p><strong>Name:</strong> <span th:text="${product.productName}"></span></p>
-                <p><strong>Price:</strong> <span th:text="${product.price}"></span></p>
-                <p><strong>Marke:</strong> <span th:text="${product.marke}"></span></p>
-                <p><strong>Size:</strong> <span th:text="${product.size}"></span></p>
-            </div>
-            <a class="btn btn-primary" th:href="@{/cart/{id}(id=${product.id})}">Add to Cart</a>
-        </div>
-    </td>
-</tr>
-</tbody>
-</table>
-
--->
 

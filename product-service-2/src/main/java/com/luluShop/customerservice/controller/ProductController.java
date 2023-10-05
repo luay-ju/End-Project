@@ -4,15 +4,11 @@ package com.luluShop.customerservice.controller;
 import com.luluShop.customerservice.FileUploadUtil;
 import com.luluShop.customerservice.cart.Cart;
 import com.luluShop.customerservice.entity.Product;
-//import com.luluShop.customerservice.login.repo.UserRepo;
-//import com.luluShop.customerservice.login.service.UserService;
-//import com.luluShop.customerservice.repository.ProductRepository;
 import com.luluShop.customerservice.orders.Order;
 import com.luluShop.customerservice.rmq.MessageListener;
 import com.luluShop.customerservice.service.CartService;
 import com.luluShop.customerservice.service.OrderService;
 import com.luluShop.customerservice.service.ProductServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
-//import com.luluShop.customerservice.login.entity.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,37 +36,6 @@ public class ProductController {
     @Autowired
     private OrderService orderService;
 
-    //public static String uploadDirectory = System.getProperty("user.dir")+""
-
-    /*
-    @Autowired
-    private UserRepo UserRepo;p
-
-    @Autowired
-    private UserService userService;
-*/
-
-
-
-/*
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
-        return "productsHome";
-       // return findPaginated(1, "id", "asc", model);
-    }
-
-      @RequestMapping("productsHome")
-    public String Project1(Model model, @Param("keyword") String keyword) {
-        List<Product> listProduct = productService.getAllProducts(keyword);
-
-        model.addAttribute("listProduct", listProduct);
-        model.addAttribute("keyword", keyword);
-
-        return "productsHome";
-    }
-
-*/
-
     @RequestMapping("/products")
     public String Project1(Model model, @Param("keyword") String keyword) {
 
@@ -85,8 +49,6 @@ public class ProductController {
 
         return "productsHome";
     }
-
-
 
     @GetMapping("/showNewProductForm")
     public String Project2(Model model) {
@@ -104,21 +66,6 @@ public class ProductController {
 
         return "Products-AdminSpace";
     }
-/*
-    @RequestMapping("/showEditUsers")
-    public String Project4(Model model, @Param("keyword") String keyword) {
-        List<User> listUsers = userService.getAllUsers(keyword);
-
-        model.addAttribute("listUsers", listUsers);
-        model.addAttribute("keyword", keyword);
-
-        return "Edit-Users";
-    }
-
- */
-
-
-
 
     @GetMapping("/showFormForUpdate/{id}")
     public String updateImage(@PathVariable(value = "id") Integer id, Model model) {
@@ -127,17 +74,6 @@ public class ProductController {
         model.addAttribute("product", product);
         return "Edit_product";
     }
-
-    /*
-    @GetMapping("/showFormForUpdateUser/{id}")
-    public String updateUser(@PathVariable(value = "id") Integer id, Model model) {
-        User user = userService.getUserById(id);
-
-        model.addAttribute("product", user);
-        return "Edit_product";
-    }
-
-     */
 
     @GetMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable(value = "id") Integer id) {
@@ -170,16 +106,7 @@ public class ProductController {
         return "productsHome";
 
     }
-/*
-    @GetMapping("/cart")
-    public String getCart(Model model){
 
-        List<Cart> list = cartService.getAllCartItems();
-        model.addAttribute("cart",list);
-        return "cart";
-    }
-
- */
 
     @GetMapping("/cart")
     public String getCart(Model model){
@@ -242,9 +169,8 @@ public class ProductController {
         return "redirect:/cart";
     }
 
-
     @GetMapping("/admin")
-    public String goToAdminPAge(Model model){
+    public String goToAdminPage(Model model){
 
         if (MessageListener.messageEmail.equals("admin@admin")){
             return "Admin";
@@ -286,7 +212,6 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/getOrders")
     public String getOrders(Model model){
         int userId = Integer.parseInt(MessageListener.messageUserId);
@@ -303,68 +228,7 @@ public class ProductController {
         return "/orders";
     }
 
-
-
-
 }
 
-
-/*
-    @Autowired
-    private ProductRepository productRepo;
-
-    @GetMapping("/")
-    public String productsHome(){
-        return "productsHome";
-    }
-
-    @GetMapping("/clothes")
-    public String getAllClothes(){
-        return "clothes";
-    }
-
-
-    @GetMapping("/product_register")
-    public String productRegister(){
-        return "product_register";
-    }
-
-    @PostMapping("/addProducts")
-    public List<Product> addProducts(@RequestBody List<Product> productList){
-        return productService.addProducts(productList);
-    }
-
-    @GetMapping("/getProducts")
-    public List<Product> getProducts(){
-        return productService.getProducts();
-    }
-
-    @GetMapping("/getProducts/{productIdList}")
-    public List<Product> getProductsById(@PathVariable List<Integer> productIdList){
-        return productService.getProductsById(productIdList);
-    }
-
-    @PostMapping("/saveProduct")
-    public String addProduct(@ModelAttribute Product product){
-        productService.save(product);
-        return "redirect:/clothes";
-        //return "/clothes";
-    }
-
- */
-
-    /*
-    @PostMapping
-    public String saveProduct(@RequestParam("file") MultipartFile file,
-                              @RequestParam("productName") String productName,
-                              @RequestParam("marke") String marke,
-                              @RequestParam("size") String size,
-                              @RequestParam("price") double price){
-
-      productService.saveProductToDB(file,productName,marke,size,price);
-
-        return "redirect:clothes";
-    }
-*/
 
 

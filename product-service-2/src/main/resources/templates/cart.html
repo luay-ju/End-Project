@@ -92,24 +92,24 @@
 <p class="total-price" id="totalPrice">Total Price: </p>
 <div class="buy-now-button" >
     <a class="btn btn-primary" href="http://localhost:8080/pay">Buy Now</a>
-    <!--<button class="btn btn-primary">Buy now</button>-->
+
 </div>
 <script>
-    // Funktion zum Berechnen der Summe der Preise
+
     function calculateTotalPrice() {
         var totalPrice = 0;
         var priceElements = document.querySelectorAll('td:nth-child(3)');
 
-        // Iteriere über die Preis-Elemente und addiere die Preise zur Gesamtsumme
+
         for (var i = 0; i < priceElements.length; i++) {
             totalPrice += parseFloat(priceElements[i].textContent);
         }
 
-        // Aktualisiere den Text der totalen Preis-Anzeige
+
         document.getElementById('totalPrice').textContent = 'Total Price: ' + totalPrice.toFixed(2);
     }
 
-    // Rufe die Funktion zum Berechnen der Gesamtsumme auf
+
     calculateTotalPrice();
 </script>
 

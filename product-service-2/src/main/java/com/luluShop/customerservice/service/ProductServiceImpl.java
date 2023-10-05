@@ -1,6 +1,7 @@
 package com.luluShop.customerservice.service;
 
 import com.luluShop.customerservice.entity.Product;
+import com.luluShop.customerservice.repository.CartRepository;
 import com.luluShop.customerservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,11 @@ public class ProductServiceImpl implements ProductServiceInterface{
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Product saveProduct(Product product) {

@@ -14,6 +14,12 @@ public class CartService {
     private CartRepository cartRepository;
 
 
+    @Autowired
+    public void setCartRepository(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
+
     public void saveItemsInCart(Cart cart){
         cartRepository.save(cart);
     }
@@ -25,18 +31,6 @@ public class CartService {
     public  Cart getItemsById(Integer number){
         return cartRepository.getById(number);
     }
-/*
-    public List<Cart> getItemsByCartId(Integer cartId) {
-        return cartRepository.findByCartId(cartId);
-    }
-
- */
-/*
-    public List<Cart> getItemsById(String id){
-       return cartRepository.search(id);
-    }
-
- */
 
 
     public void deleteProductBYId(Integer productId) {

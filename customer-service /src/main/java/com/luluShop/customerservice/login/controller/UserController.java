@@ -165,4 +165,11 @@ public class UserController {
         return "contact";
     }
 
+    @GetMapping("/about")
+    public String showAboutPage(){
+
+        return "about";
+    }
+
+
 }

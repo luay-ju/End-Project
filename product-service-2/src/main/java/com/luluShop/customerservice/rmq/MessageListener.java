@@ -16,4 +16,19 @@ public class MessageListener {
         messageUserId = message.getMessage();
     }
 
+    public static String getMessageEmail() {
+        return messageEmail;
+    }
+
+    public static void setMessageEmail(String messageEmail) {
+        MessageListener.messageEmail = messageEmail;
+    }
+
+    public static String getMessageUserId() {
+        return messageUserId;
+    }
+
+    public static void setMessageUserId(String messageUserId) {
+        MessageListener.messageUserId = messageUserId;
+    }
 }

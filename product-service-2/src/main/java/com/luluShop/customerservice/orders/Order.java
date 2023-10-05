@@ -5,6 +5,7 @@ import com.luluShop.customerservice.entity.Product;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class Order {
     private int orderId;
     private String invoice;
     private int userId;
+
 
     @Override
     public String toString() {

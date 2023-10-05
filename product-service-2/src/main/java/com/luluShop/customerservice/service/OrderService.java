@@ -2,6 +2,7 @@ package com.luluShop.customerservice.service;
 
 import com.luluShop.customerservice.cart.Cart;
 import com.luluShop.customerservice.orders.Order;
+import com.luluShop.customerservice.repository.CartRepository;
 import com.luluShop.customerservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    public void setOrderRepository(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     public void saveItems(Order order){
         orderRepository.save(order);
@@ -28,17 +34,8 @@ public class OrderService {
 
     public List<Order> getItemsByUserId(int userId){
 
-        /*
-        List<Order> orders = orderRepository.findByUserId(userId);
-        if (!orders.isEmpty()) {
-            // Wenn es Bestellungen mit dieser userId gibt, geben Sie die erste zurück.
-            return orders.get(0);
-        } else {
-            return null;
-        }
-
-         */
         return null;
     }
+
 }
 
